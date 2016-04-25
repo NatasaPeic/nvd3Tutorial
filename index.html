@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PC</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.min.css" />
+  <link rel="stylesheet" href="bower_components/Materialize/dist/css/materialize.min.css" />
+
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
+  <script type="text/javascript" src="bower_components/nvd3/build/nv.d3.min.js"></script>
+  <script type="text/javascript" src="bower_components/Materialize/dist/js/materialize.min.js"></script>
+  <script type="text/javascript" src="scripts/basicChart1.js"></script>
+  <script type="text/javascript" src="scripts/basicChart2.js"></script>
+  <script type="text/javascript" src="scripts/basicChart3.js"></script>
+  <script type="text/javascript" src="scripts/basicChart4.js"></script>
+ 
+  
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Visualization with NVD3</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container">
+
+    <h1 class="col l12"> NVD3: How to create a Simple Scatter Plot? </h1>
+    <h5>Author: <a href="http://gagn.io">Liron Shimrony</a></h5>
+
+    <p class="col l11">
+    <a href="http://nvd3.org" target="_blank">NVD3</a> is an easy to use visualization library. It is based on <a href="https://d3js.org/" target="_blank">D3.js</a> and the big idea of this library is
+    the ability to create reusable components. You can look at it like the difference between C and Python. Using C, you have control over everything, even at the very low level. Using python is easier but you can not get the same control as you get in C.
+    </p>
+    
+    <h5>Notes:</h5>
+    <p>
+      <ol>
+        <li> The <a href="http://archive.ics.uci.edu/ml/datasets/Wine" target="_blank"> Wines Data Set</a> from <a href="http://archive.ics.uci.edu/ml/index.html" target="_blank">UCI</a> </li>
+        <li>The code for this tutorial can be downloaded from my GitHub<a href="https://github.com/lsxliron/nvd3Tutorial" target="_blank"> repo </a></li>
+      </ol>
+    </p>
+
+    <p>
+      This tutorial is divided into 6 parts:
+      <div class="collection">
+        <a href="#step1" class="collection-item"> Create a basic chart with 4 hard coded points </a>
+        <a href="#step2" class="collection-item"> Extend the previous figure by adding a legend and have the ability to get data when we hovering over points </a>
+        <a href="#step3" class="collection-item"> Getting the <em>Wines Data Set</em> and convert it from CSV to JSON </a>
+        <a href="#step4" class="collection-item"> Create a scatter plot of alcohol vs. color intensity using the wines dataset </a>
+        <a href="#step5" class="collection-item"> Extend the previous chart by visualizing the alcohol vs. color intensity and adding different colors for each wine class and a variable point size according the the wine hue. </a>
+        <a href="#conclusions" class="collection-item">Conclusions</a>
+      </div>
+    </p>
+
+    
+    <h4 id="step1">Step 1 - Create a basic chart with 4 hard coded points</h4>
+    <p class="col l11">
+      The following code, will create a simple scatter plot with 4 points. For simplicity, we removed the legend for now however we will put it back in part 2.
+    </p>
+    
+    <script src="https://gist.github.com/lsxliron/8db9d3655ea2b935d5acdcbff7b327e9.js"></script>
+    <svg id="basicChart1"></svg>
+
+    As you can see, this is a plain chart. Lines 3 to 13 defines the chart attributes, line 17 sets the data for the chart and lines 20 to 25 will add the chart to the page. 
+    <div class="divider"></div>
+
+    <h4 id="step2">Step 2 - Adding a Legend and Setting the Axes Tick Format</h3>
+    <p>
+      Now, that we have a basic figure, let's make some modification.<br>
+      Most likely, we will not deal only with discrete data. In order to deal with continues data, we need to change the axis format. In this case, two digits after the decimal point will be sufficient. <br>
+      Line 19 and 20 will set the axes format to 2 digits after the decimal point. 
+      A legend is an important thing to have, thus we change the value in line 8 from <code> false </code> to <code> true </code>.<br>
+      Lastly, we add the ability hover over the points to see their coordinates. We do this by changing the values in line 11 from <code> false </code> to <code> true </code>
+    </p>
+    
+    <script src="https://gist.github.com/lsxliron/dd6276ffaadd1abeefa5082ab59be615.js"></script>
+    <svg id="basicChart2"></svg>
+    <div class="divider"></div>
+    
+    <h4 id="step3">Step 3 - Converting Data to JSON</h4>
+    <p>
+        The <a href="http://archive.ics.uci.edu/ml/datasets/Wine" target="_blank">Data Set</a> comes in a <code>CSV</code> format. However, when using JavaScript, <code>JSON</code> is my favorite data format. The following Python code will convert the data from a <code>CSV</code> to <code>JSON</code>.
+    </p>
+
+    <script src="https://gist.github.com/lsxliron/c8d52176f1bfb380abc3e445a6b19487.js"></script>
+
+    <p>
+      You can download this file and run it. On line 6, change the file name in the <code>infile</code> variable so it will match the <code>CSV</code> file. On line 24 ,change the output filename. In this tutorial I will call this file <code>data.json</code>
+    </p>
+    <div class="divider"></div>
+
+    <h4 id="step4"> Step 4 - Plotting the Wines Data Set </h4>
+    <p>
+      Now, after we converted our data into <code>JSON</code> format, we can use <strong>NVD3</strong> to visualize it. The following code will create a scatter plot of the data. Notice that <strong>NVD3</strong> chooses the axes range for us and thus the <em>X</em> axis does not start from 0. Also notice that on the <em>Y</em> axis, we have some points that are above the axes ticks. We will take care of that in the next step.
+    </p>
+    <script src="https://gist.github.com/lsxliron/f4fc2d6ad48b34a58b23f9de1c53429f.js"></script>
+    <svg id="basicChart3"></svg>
+
+    <p>
+      The first function was not changed since part 2. However, we added another function (<code>getDataPlain()</code>) which will read our data from file and will return it to the chart. <br>
+      This function is basically a simple <code>ajax</code> request. Now, it is important to mention that the data structure for <strong>NVD3</strong> is a list of object. For now, we will use only one object which includes 2 keys: 
+      <ol>
+        <li> key (wines) </li> 
+        <li> values which is an array of objects. Each object has the following keys:
+          <ul>
+            <li> x: the x axis coordinate</li>
+            <li> x: the y axis coordinate</li>
+          </<u></u>l>
+        </li>
+      </ol>
+
+      From looking on the figure above, it is hard to derive conclusions. In the next step we will organize the data in a way that will actually teach us something about this data.
+    </p>
+    <div class="divider"></div>
+    <h4 id="step5">Step 5 - Visualizing the Wines Data Set</h4>
+
+    <p>
+      In the previous step, we plotted the data and realized that it is hard to learn something new about it from the current plot. We can visualize more than 2 dimensions on this scatter plot by creating a 3rd dimension using different color for every wine class and a 4th dimensions by changing the size of every point according to the wine hue. More hue means bigger point and vice versa.
+    </p>
+    <script src="https://gist.github.com/lsxliron/d1317a4a12dcc6c8b64dd98efe68a0ad.js"></script>
+    <svg id="basicChart4"></svg>
+
+    <p>
+      The only change we made in the main function is in lines 16 - 17 which tells NVD3 the desired range for our axes. This will fix the points that are out of the graph in the previous step.We also changed the way we construct the data in <code>getData</code> function. Now we create a an object for each wine class. From inspecting the data, we know that we have only 3 classes. lines 52 - 53 are creating those objects. Lines 55 to 63 putting each wine in the right class. Notice that we also added the hue data as the size of the point. Larger size means bigger hue.
+    </p>
+
+    <h4 id="conclusions">Conclusion</h4>
+    <p>
+      After inspecting the new plot, we can find immediately find some relationships between the different wine classes. For example, we can see that almost all the wines from class 2 has less alcohol from the wines in class 1. Also, the the color intensity of wines from class 3 is higher than the color intensity of wines from class 2. Lastly, we can see that most of the wines in class 3 has a low hue since their points size is the smallest. 
+    </p>
+  </div> <!--Container-->
+
+  <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+              </div>
+              <div class="col l4 offset-l2 s12">
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            &copy; Created by Liron Shimrony
+            <a class="grey-text text-lighten-4 right" href="http://gagn.io">http://gagn.io</a>
+            </div>
+          </div>
+        </footer>
+
+
+
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      createBasicChart1()
+      createBasicChart2()
+      createBasicChart3()
+      createBasicChart4()
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+svg {display: block;}
+
+#test1{
+  margin: 20px;
+  padding: 0px;
+  height: 40%;
+  width: 40%;
+}
+
+#basicChart1,
+#basicChart2, 
+#basicChart3, 
+#basicChart4{
+  height:550px; width:750px
+}
+
+h4{
+  padding-top:50px;
+}
+
+code{
+  color:deepPink;
+}
