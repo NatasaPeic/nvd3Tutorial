@@ -1,3 +1,6 @@
+"""
+    This module converts data from CSV format to JSON
+"""
 import json
 import csv
 
