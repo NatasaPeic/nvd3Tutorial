@@ -21,3 +21,8 @@ h4{
 code{
   color:deepPink;
 }
+
+#noteSpan{
+  margin-left:10px; 
+  display: block;
+}

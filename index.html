@@ -28,7 +28,7 @@
   
   <div class="container">
 
-    <h1 class="col l12"> NVD3: How to create a Simple Scatter Plot? </h1>
+    <h1 class="col l12"> NVD3: How to Create a Simple Scatter Plot? </h1>
     <h5>Author: <a href="http://gagn.io">Liron Shimrony</a></h5>
 
     <p class="col l11">
@@ -45,8 +45,9 @@
     </p>
 
     <p>
-      This tutorial is divided into 6 parts:
+      This tutorial is divided into 7 parts:
       <div class="collection">
+        <a href="#step0" class="collection-item"> Create a basic template to draw your chart on </a>
         <a href="#step1" class="collection-item"> Create a basic chart with 4 hard coded points </a>
         <a href="#step2" class="collection-item"> Extend the previous figure by adding a legend and have the ability to get data when we hovering over points </a>
         <a href="#step3" class="collection-item"> Getting the <em>Wines Data Set</em> and convert it from CSV to JSON </a>
@@ -56,7 +57,17 @@
       </div>
     </p>
 
-    
+    <h4 id="step0">Step 0 - Create a basic template</h4>
+    <p class="col l11">
+      In order to create the graphs, we need a simple <code>HTML</code> template. The following <code>HTML</code> code will be sufficient. <br>
+      <strong>Note:</strong><br />
+      <span id="noteSpan">
+      When you write the javascript code, make sure to change the d3 selector id to a one that will match with the template <br />
+      (e.g <code>basicChart</code>)</span>
+    </p>
+    <script src="https://gist.github.com/lsxliron/5b627ade013ec7815baf812ed52e6fd0.js"></script>
+    <div class="divider"></div>
+
     <h4 id="step1">Step 1 - Create a basic chart with 4 hard coded points</h4>
     <p class="col l11">
       The following code, will create a simple scatter plot with 4 points. For simplicity, we removed the legend for now however we will put it back in part 2.
