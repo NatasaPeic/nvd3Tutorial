@@ -1,0 +1,23 @@
+{
+  "name": "ScatterPlot Tutorial",
+  "authors": [
+    "Liron Shimrony <lsxliron@Lgmail.com>"
+  ],
+  "description": "A tutorial on making scatterplot using NVD3",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "tutorial",
+    "nvd3",
+    "scatterplot",
+    "visualization"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "Materialize": "materialize#^0.97.6",
+    "nvd3": "^1.8.2"
+  }
+}
